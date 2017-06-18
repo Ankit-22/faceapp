@@ -1,15 +1,42 @@
 var express=require('express');
-var user=require('../models/user_model.js');
+var user = require('../models/user_model.js');
+var blocks = require('../models/block_model.js');
 var router=express.Router();
-
 router.get('/users/:id',function(req,res,next){
-		user.getAll(req.pool,(err,data)=>{
-if(err)
-	throw err;
-			res.render("showusers.handlebars",{user:data});
-		});
-
+	user.getByName(req.pool, req.params.id, function(err, data){
+		if( err === null )
+		{
+			var user = data[0];
+			let block = {
+				b1: 1,
+				b2: user.id
+			};
+			blocks.get(req.pool, block, function(err, data){
+				if(err === null)
+				{
+					if(data[0].blocker = block.b1)
+					{
+						res.json({error: 503, status: "You have blocked the person. Unblock to see their profile."});
+					}
+					else
+					{
+						res.json({error: 503, status: "You do not have Permission to view this."});
+					}
+				}
+				else
+				{
+					if(user.is_activated = 1)
+						res.json(user);
+					else
+						res.json({error: 404, status: "No User Found"});
+				}
+			});
+		}
+		else
+		{
+			res.json({error: 404, status: "No User Found"});
+		}
+	});
 });
 // router.post('')
-
 module.exports=router;
