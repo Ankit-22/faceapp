@@ -1,0 +1,23 @@
+{
+  "name": "faceapp",
+  "version": "1.0.0",
+  "description": "Chat App",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "client-sessions": "^0.8.0",
+    "express": "^4.10.6",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.10",
+    "mysql": "^2.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ankit Tripathi ,Jigar Wala",
+  "license": "ISC",
+  "devDependencies": {}
+}
