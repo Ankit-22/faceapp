@@ -2,8 +2,9 @@ var express=require('express');
 var user = require('../models/user_model.js');
 var blocks = require('../models/block_model.js');
 var router=express.Router();
-router.get('/users/:id',function(req,res,next){
-	user.getByName(req.pool, req.params.id, function(err, data){
+//anyone can access this route  ,, will change later if only logged in users can see profiles ,for now anyone can see 
+router.get('/users/:username',function(req,res,next){
+	user.getByName(req.pool, req.params.username, function(err, data){
 		if( err === null )
 		{
 			var user = data[0];

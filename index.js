@@ -11,6 +11,7 @@ var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+/**dont compile everytime,change later(create pre compiled)**/
 //overide render function of response
 express.response.render=function(filename,obj){
 	//doesn't matter if obj is null or not passed at all 
@@ -27,14 +28,6 @@ app.use(sessions({
 	duration: 24 * 60 * 60 * 1000, // how long the session will stay valid in ms
 	activeDuration: 1000 * 60 * 5 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
 }));
-
-app.use((req,res,next)=>{
-	if(req.session)
-		next();
-	else
-		res.redirect('/');
-});
-
 app.use(express.static(path.join(__dirname,'bower')));
 app.use(jsonParser);
 app.use(urlencodedParser);

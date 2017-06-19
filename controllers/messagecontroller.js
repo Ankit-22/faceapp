@@ -2,16 +2,13 @@ var express=require('express');
 var router=express.Router();
 var chatDetails = require('../models/chat_details_model.js');
 var messages = require('../models/messages_model.js');
-router.get('/:usrname/:chatid',function(req,res){
-	var session = {
-		id: 1,
-		name: 'ankit_22'
-	}
-	if(req.params.usrname == session.name)
+router.get('/:usrname/:chatid',require('../middlewares/authenticate'),function(req,res){
+//session is allready created so can access it in req
+	if(req.params.usrname == req.session.username)
 	{
 		var details = {
 			chatId: req.params.chatid,
-			userId: session.id
+			userId: req.session.id
 		}
 		chatDetails.get(req.pool, details, function(err, data){
 			if(err === null)

@@ -7,7 +7,7 @@ router.get('*/favicon.ico',function(req,res){
 
 //home page change later
 router.get('/',function(req,res){
-	res.sendFile('public/home.html',{root:__dirname+"/../"});
+	res.sendFile('public/index.html',{root:__dirname+"/../"});
 });
 
 
