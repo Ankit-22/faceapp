@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="materialize/dist/css/materialize.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Sign Up!</title>
+<style>
+.gender-male,.gender-female {
+  display: inline-block;
+}
+
+	.wrapper {
+  padding: 20px 25px;
+  border: 3px solid #3949ab;
+  border-radius: 2%;
+	}
+label{
+  width:100%;
+}
+</style>
+</head>
+<body>
+<nav class="indigo darken-3">
+      <div class="nav-wrapper container " >
+      <a href="/" class="brand-logo ">Faceapp</a>
+       <a  href ="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="hide-on-med-and-down right">
+        <li><a href="login">login</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <ul id="nav-mobile" class="right side-nav">
+        <li><a href="login">Login</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+        </div>
+  </nav>
+
+<div style="height:50px"></div>
+
+	<div class="container wrapper z-depth-5  ">
+<div class="row">
+    <form class="col s12" id="reg-form" action='register' method='post'>
+      <div class="row">
+        <div class="input-field col s6">
+          <input name="first_name" type="text" class="" data-length="10" autofocus required  />
+          <label for="first_name" >First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input name="last_name" type="text" class="" data-length="10" required / >
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">account_circle</i>
+          <input name="user_name" type="text" class="" required / >
+          <label for="user_name">User Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="email_id" type="email" class="" required / >
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="password" type="password" class="" data-length="20" required / >
+          <label for="password">Password</label>
+        </div>
+      </div>
+            <div class="row">
+        <div class="input-field col s12">
+          <input type="date" class="datepicker" name="dob" required / > 
+          <label for="dob">Date Of Birth</label>
+        </div>
+      </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col m6 s12 ">
+          <div class="gender-male">
+            <input class="with-gap" name="gender" type="radio" value="m"  id="male" checked />
+            <label for="male">Male</label>
+          </div>
+          <div class="gender-female">
+            <input class="with-gap" name="gender" type="radio" value="f"  id="female" />
+            <label for="female">Female</label>
+          </div>
+        </div>
+		
+        <div class="input-field col m3 hide-on-small-and-down">
+          <button class="btn btn-large  waves-effect waves-light indigo darken-2" type="reset" >
+          Clear
+          </button>
+        </div>
+         <div class="input-field col m3 hide-on-small-and-down">
+          <button class="btn btn-large  waves-effect waves-light indigo darken-2" type="submit">
+          Register
+          </button>
+        </div>
+    <div class="row hide-on-med-and-up"></div>
+
+		<div class="row hide-on-med-and-up">
+		<div class="input-field col s4 " >
+          <button class="btn  btn-large waves-effect waves-light indigo darken-2" type="reset" >
+          Clear
+          </button>
+        </div>
+         <div class="input-field col s4">
+          <button class="btn btn-large waves-effect waves-light indigo darken-2" type="submit">
+          Register
+          </button>
+        </div>
+		</div>
+
+      </div>
+    </form>
+  </div>
+ 
+</div>
+
+  <div style="height:50px"></div>
+
+      <footer class="page-footer indigo darken-4">
+      <div class="  white-text flow-text center" >&copy; Faceapp.com , All Rights Reserved</div>
+     <div style="height:20px"></div>
+    </footer> 
+
+
+<script src="jquery/dist/jquery.min.js"></script>
+<script src="materialize/dist/js/materialize.min.js"></script>	
+<script src="./js/register.js"> </script>
+</body>
+</html>

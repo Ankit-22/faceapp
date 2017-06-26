@@ -5,6 +5,14 @@ const user=require('../models/user_model');
 router.get('/login',(req,res)=>{
 res.sendFile('public/login.html',{root:__dirname+"/../"});
 });
+router.get('/register',(req,res)=>{
+res.sendFile('public/register.html',{root:__dirname+"/../"});
+});
+router.post('/register',(req,res)=>{
+
+res.send(req.body);
+
+});
 //anyone can access this route
 router.post('/login',(req,res)=>{
 	let username=req.body.username;
@@ -31,9 +39,9 @@ router.post('/login',(req,res)=>{
 });
 //anyone can access this route
 router.get('/logout',(req,res)=>{
-	req.session.reset();
+if(req.session)
+req.session.reset();
 res.redirect('/');
-
 });
 
 module.exports=router;

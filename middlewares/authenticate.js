@@ -7,6 +7,6 @@ module.exports=(req,res,next)=>{
 	}
 	else{
 		console.log('unauthorized access for '+req.url);
-		res.redirect('/');
+		res.status(403).redirect('/');
 	}
 };
