@@ -2,8 +2,8 @@ var express=require('express');
 var user = require('../models/user_model.js');
 var blocks = require('../models/block_model.js');
 var router=express.Router();
-router.get('/users/:id',function(req,res,next){
-	user.getByName(req.pool, req.params.id, function(err, data){
+router.get('/users/:id', (req, res, next)=>{
+	user.getByName(req.pool, req.params.id, (err, data)=>{
 		if( err === null )
 		{
 			var user = data[0];
@@ -11,10 +11,10 @@ router.get('/users/:id',function(req,res,next){
 				b1: 1,
 				b2: user.id
 			};
-			blocks.get(req.pool, block, function(err, data){
+			blocks.get(req.pool, block, (err, data)=>{
 				if(err === null)
 				{
-					if(data[0].blocker = block.b1)
+					if(data[0].blocker == block.b1)
 					{
 						res.json({error: 503, status: "You have blocked the person. Unblock to see their profile."});
 					}
@@ -25,8 +25,8 @@ router.get('/users/:id',function(req,res,next){
 				}
 				else
 				{
-					if(user.is_activated = 1)
-						res.json(user);
+					if(user.is_activated == 1)
+						res.render('user_view.handlebars', user);
 					else
 						res.json({error: 404, status: "No User Found"});
 				}

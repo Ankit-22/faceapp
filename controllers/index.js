@@ -13,6 +13,7 @@ router.get('/',function(req,res){
 
 router.use(require('./misc.js'));
 router.use(require('./usercontroller.js'));  //set this in proper sequence
+router.use(require('./friend_controller.js'));
 router.use(require('./chatcontroller.js'));
 router.use(require('./messagecontroller.js'));
 

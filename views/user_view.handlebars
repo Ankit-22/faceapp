@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>{{first_name}} {{last_name}}</title>
+		</head>
+		<body>
+			<div class="container">
+				<div class="card teal lighten-3 center-align">
+					<img class = "circle responsive-img" src="http://lorempixel.com/200/200/sports/1" alt="">
+					<h4>{{user_name}}</h4>
+					<div class="info hide">
+						<div class="row">
+							<div class="col s2 left-align"><h5>Name:<h5></div>
+							<div class="col s8 center-align"><h5>{{first_name}} {{last_name}}</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Email:</h5></div>
+							<div class="col s8 center-align"><h5>{{email}}</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Last Seen:</h5></div>
+							<div class="col s8 center-align"><h5>{{last_seen}}</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Status:</h5>
+							</div>
+							<div class="col s8 center-align"><h5>{{status}}</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Status Time:</h5></div>
+							<div class="col s8 center-align"><h5>{{status_time}}</h5></div>
+						</div>
+						<div class="row" id = "friends">
+							<div class="col s2 left-align"><h5>Friends:</h5></div>
+							<div class="col s8 center-align"><h5>{{no_of_friends}}</h5></div>
+						</div>
+						<div id = "friend_list"></div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Birthday:</h5></div>
+							<div class="col s8 center-align"><h5>{{date_of_birth}}</h5></div>
+						</div>
+						<div class="row">
+							<div class="col s2 left-align"><h5>Joined:</h5></div>
+							<div class="col s8 center-align"><h5>{{join_time}}</h5></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+			<script>
+				$(document).ready(()=>{
+					$('.card').click(()=>{
+						$('.info').removeClass('hide');
+					});
+					$("#friends").click(function(){
+						$.post(window.location.href,
+						{
+							req_id: "1"
+						},
+						function(data, status){
+							alert("Data: " + data.friends + "\nStatus: " + status);
+						});
+					});
+				});
+			</script>
+		</body>
+	</html>
