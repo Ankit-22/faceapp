@@ -1,6 +1,8 @@
 //only letters ,length between 3 to 10
 const fnPattern=new RegExp("^[a-zA-Z]{3,10}$");
 const lnPattern=new RegExp("^[a-zA-Z]{3,10}$");
+const emailPattern=new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+
 //wrong eg:john_doe,john,john22
 const usernamePattern=new RegExp("^[a-zA-Z]+([_]?[a-zA-Z0-9])*$");
 let fn,ln,username,email,password,dob,dob_formatted;
@@ -38,26 +40,6 @@ if(!usernamePattern.test(username.val())){
 	username.next().attr('data-error',usernameError);
 	return false;
 }
-else{
-	let flag=false;
-
-	$.ajax({
-	url:'/users/'+username.val()
-	}).then((user)=>{
-		flag=true;
-	}).catch((err)=>{
-	console.log(err);
-	});
-		/*****Stoped here**************/
-
- //wait for ajax and then do below ???	
-	if(flag){
-		console.log(" fakir")
-		username.addClass('invalid');
-	username.next().attr('data-error',usernameTaken);
-		return false;
-	}
-}
 return true;
 }
 function passwordValidate(){
@@ -78,6 +60,16 @@ function dobValidate(){
 	return false;
 	}
 	return true;
+}
+function emailValidate(){
+	email.removeClass('invalid');
+	email.next().removeAttr('data-error');
+	if(!emailPattern.test(email.val())){
+		email.addClass('invalid');
+		email.next().attr('data-error','Please enter proper email id');
+		return false;
+	}
+return true;
 }
 $(()=>{
      $('.button-collapse').sideNav({
@@ -108,9 +100,10 @@ $(()=>{
   ln.on('change',()=>{lnValidate()});
 
  username=$('#reg-form input[name=user_name]');
- username.change('on',()=>{usernameValidate()});
+ username.on('change',()=>{usernameValidate()});
 
  email=$('#reg-form input[name=email_id]');
+ email.on('change',()=>{emailValidate()});
 password=$('#reg-form input[name=password]');
 password.characterCounter();
 password.on('change',()=>{passwordValidate()});
@@ -118,9 +111,21 @@ password.on('change',()=>{passwordValidate()});
  dob_formatted=$('#reg-form input[name=dob_formatted]');
 
 
-$('#reg-form').on('submit',()=>{
-	
-return fnValidate()&&lnValidate()&&usernameValidate()&&passwordValidate()&&dobValidate();
+$('button#submitbtn').on('click',(e)=>{
+e.preventDefault();
+	 if(fnValidate()&&lnValidate()&&usernameValidate()&&emailValidate()&&passwordValidate()&&dobValidate()){			
+			$.ajax({
+			url:'/users/'+username.val(),
+			success:(user,status,xhr)=>{
+				username.addClass('invalid');
+				username.next().attr('data-error',usernameTaken);
+				},
+			error:(xhr,status,err)=>{
+
+				$('#reg-form').submit();
+			}
+			});
+	 }
 });
 
 });
