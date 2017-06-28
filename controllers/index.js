@@ -13,6 +13,11 @@ router.get('/',function(req,res){
 	res.sendFile('public/home.html',{root:__dirname+"/../"});
 });
 
+router.get('/logout', (req, res)=>{
+	if(req.session)
+		req.session.reset();
+	res.redirect('/');
+})
 
 router.use(require('./misc.js'));
 router.use(require('./usercontroller.js'));  //set this in proper sequence
