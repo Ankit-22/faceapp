@@ -2,7 +2,7 @@ const express = require('express');
 const handlebars=require('handlebars');
 const dbpool=require('./controllers/pool.js'); //pool is created already (see controllers/pool.js)
 const path=require('path');
-const sessions=require('client-sessions')
+const sessions=require('client-sessions');
 const bodyParser=require('body-parser');
 
 // create application/json parser
@@ -11,6 +11,7 @@ var jsonParser = bodyParser.json();
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+/**dont compile everytime,change later(create pre compiled)**/
 //overide render function of response
 express.response.render=function(filename,obj){
 	//doesn't matter if obj is null or not passed at all 
@@ -28,14 +29,8 @@ app.use(sessions({
 	activeDuration: 1000 * 60 * 5 // if expiresIn < activeDuration, the session will be extended by activeDuration milliseconds
 }));
 
-app.use((req,res,next)=>{
-	if(req.session)
-		next();
-	else
-		res.redirect('/');
-});
-
 app.use(express.static(path.join(__dirname,'bower')));
+app.use(express.static(path.join(__dirname,'public'))); //changed index.html => home.html
 app.use(jsonParser);
 app.use(urlencodedParser);
 
@@ -44,7 +39,6 @@ app.use(function(req,res,next){
 req.pool=dbpool;
 next();
 });
-
 app.use(require('./controllers'));
 
 let port = 3000;

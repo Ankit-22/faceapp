@@ -1,5 +1,5 @@
 module.exports={
-	getAllFor:(pool,obj,cb)=>{
+	get:(pool,obj,cb)=>{
 		pool.getConnection((err,connection)=>{
 			if(err)
 				cb(err,null);
